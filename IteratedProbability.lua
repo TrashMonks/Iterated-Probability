@@ -13,9 +13,14 @@ end
 function IP.eachTry(baseProbability)
     assert(isProbability(baseProbability), 'baseProbability is not a probability')
 
-    return function (sumSoFar, count)
-        assert(false, 'TODO')
-    end, 0, 0
+    local count, sumSoFar = 0, 0
+
+    return function ()
+        local currentCount, currentSumSoFar = count, sumSoFar
+        count = currentCount + 1
+        sumSoFar = currentSumSoFar + baseProbability * (1 - baseProbability) ^ currentCount
+        return currentCount, currentSumSoFar
+    end
 end
 
 function IP.tryFor(count, baseProbability)
