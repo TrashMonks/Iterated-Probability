@@ -3,11 +3,15 @@ local IP = {
 }
 
 local function isNatural(value)
-    return math.floor(value) == value and value >= 0
+    return type(value) == 'number'
+       and math.floor(value) == value
+       and value >= 0
 end
 
 local function isProbability(value)
-    return 0 <= value and value <= 1
+    return type(value) == 'number'
+       and 0 <= value
+       and value <= 1
 end
 
 function IP.eachTry(baseProbability)
